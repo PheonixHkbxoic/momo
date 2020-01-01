@@ -36,6 +36,7 @@ sudo make install
 
 
 如下：表示安装成功
+```txt
 
 [pheonix@localhost bochs-2.6.10]$ bochs
 ========================================================================
@@ -82,9 +83,31 @@ You can also start bochs with the -q option to skip these menus.
 7. Quit now
 
 Please choose one: [6] 
-
+```
 
 默认的配置文件为.bochsrc, 当然也可以手动指定配置文件bochs -f .bochsrc
+
+
+
+ 3) 创建软盘映像
+在bochs安装好之后，执行
+bximage                  //出现界面如下，划线部分是是需要自己输入的，某些部分也可以采用默认值
+
+3：要编译的代码boot.asm
+
+4:编译代码
+nasm boot.asm   -o    boot.bin                  //boot.bin为生成的文件名
+
+5：引导扇写入软盘：
+dd    if=boot.bin  of=a.img  bs=512  count=1  conv=notrunc
+
+6：相关.bochsrc的配置文件稍后附加上，切记要先进行。bochsrc文件的配置，才能启动
+
+7：bochs启动
+
+
+上面3－7参考链接：https://blog.csdn.net/ending06/article/details/8193372
+
 
 ## 关于bochs命令的参数
 [pheonix@localhost bochs-2.6.10]$ bochs --help
